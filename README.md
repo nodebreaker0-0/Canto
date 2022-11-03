@@ -2,7 +2,7 @@
 
 **How to validate on the Canto Mainnet**
 
-_(canto_7744-1)_
+_(canto_7744-1)_1
 
 > Genesis file [Published](https://github.com/Canto-Network/Canto/raw/main/Mainnet/genesis.json)
 > Peers list [Published](https://github.com/Canto-Network/Canto/blob/main/Mainnet/peers.txt)
