@@ -47,6 +47,28 @@ const (
 	EnvPrefix = "canto"
 )
 
+var (
+	// AddressVerifier address verifier
+	AddressVerifier = func(bz []byte) error {
+		if n := len(bz); n != 20 && n != 32 {
+			return fmt.Errorf("incorrect address length %d", n)
+		}
+
+		return nil
+	}
+)
+
+func GetConfig() *sdk.Config {
+	sdkConfig := sdk.GetConfig()
+	sdkConfig.SetPurpose(uint32(44))
+	sdkConfig.SetCoinType(uint32(118))
+	sdkConfig.SetBech32PrefixForAccount(cmdcfg.Bech32PrefixAccAddr, cmdcfg.Bech32PrefixAccPub)
+	sdkConfig.SetBech32PrefixForValidator(cmdcfg.Bech32PrefixValAddr, cmdcfg.Bech32PrefixValPub)
+	sdkConfig.SetBech32PrefixForConsensusNode(cmdcfg.Bech32PrefixConsAddr, cmdcfg.Bech32PrefixConsPub)
+	sdkConfig.SetAddressVerifier(AddressVerifier)
+	return sdkConfig
+}
+
 // NewRootCmd creates a new root command for cantod. It is called once in the
 // main function.
 func NewRootCmd() (*cobra.Command, params.EncodingConfig) {
